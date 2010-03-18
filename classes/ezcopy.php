@@ -366,7 +366,7 @@ class eZCopy
 		$this->localDatabaseCleanUp();
 		
 		// clear cache
-		$this->clearLocalCache();
+		$this->clearLocalCache( $this->data['document_root'] . $this->data['ssh_user'] );
 		
 		$this->log("DATABASE UPDATED\n", 'ok');
 	}
