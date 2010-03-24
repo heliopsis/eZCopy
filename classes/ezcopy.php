@@ -1012,10 +1012,8 @@ class eZCopy
 	}
 	function clearLocalCache($path)
 	{
-		$this->log("Clearing cache ");
-		exec("cd " . $path . ";".$this->getPathToPHP()." bin/php/ezcache.php --clear-all --purge");
-		$this->log("OK\n", 'ok');
-		//$this->manualAttentionNotificationList[] = 'You need to clear the cache by running: "php bin/php/ezcache.php --clear-all --purge" in the ez root folder' . "\n";
+		//$this->log("Clearing cache ");
+		$this->manualAttentionNotificationList[] = 'You need to clear the cache!' . "\n";
 	}
 	function checkpoint($exitedOn, $extraText='')
 	{
