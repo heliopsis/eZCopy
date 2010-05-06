@@ -115,7 +115,6 @@ class eZCopy
 		{
 			$basePath = $this->getNewDistroPathName();
 		}
-		
 		set_include_path(get_include_path() . PATH_SEPARATOR . $basePath);
 		
 		// include files in new distro for parsing ini files
@@ -128,7 +127,6 @@ class eZCopy
 		// initate INI files
 		$useTextCodec 	= false;
 		$ini 			= eZINI::fetchFromFile( $basePath . $file, $useTextCodec );
-		
 		return $ini;
 	}
 	
@@ -997,11 +995,11 @@ class eZCopy
 		
 		$this->log("OK\n", 'ok');
 	}
-	function getPathToPHP()
+	function getPathToPHP( $version=5)
 	{
-		if($this->cfg->hasSetting( 'ezcopy', 'General', 'pathToPHP' ))
+		if($this->cfg->hasSetting( 'ezcopy', 'General', 'pathToPHP' . $version ))
 		{
-			$phpPath = $this->cfg->getSetting( 'ezcopy', 'General', 'pathToPHP' );
+			$phpPath = $this->cfg->getSetting( 'ezcopy', 'General', 'pathToPHP' . $version );
 			
 			if ( $phpPath != '' )
 			{
@@ -1015,9 +1013,9 @@ class eZCopy
 		//$this->log("Clearing cache ");
 		$this->manualAttentionNotificationList[] = 'You need to clear the cache!' . "\n";
 	}
-	function checkpoint($exitedOn, $extraText='')
+	function checkpoint($exitedOn, $extraText='', $forceCheckpoint=false)
 	{
-			if ( $this->checkpoint )
+			if ( $this->checkpoint OR $forceCheckpoint)
 			{
 				$this->output->formats->question->color = 'blue';
 				$question = new ezcConsoleQuestionDialog( $this->output );
